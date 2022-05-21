@@ -1,21 +1,25 @@
 <template>
-    
-  <div>
-    <MainCard
-    v-for="(singleFilm,index) in filmlist" :key="`film${index}`"
-    :film="singleFilm"
-    />
+  <div class="my-main">
+    <div class="k_container">
 
-  </div>
+      <ShowMovieComp :onlyFilmList="filmlist"
+      />
+
+    </div>
+
+    </div>
+
+
+    
 </template>
 
 <script>
-import MainCard from '@/components/MainCard'
+import ShowMovieComp from '@/components/ShowMovieComp'
 
 export default {
   name: 'MainComp',
   components:{
-    MainCard
+    ShowMovieComp
   },
 
   props:{
@@ -24,6 +28,19 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.my-main{
+  min-height: 100vh;
+  background-color: #242832;
+  padding-top: 100px;
+  color:white; 
+  .k_container{
+    width: 75%;
+    margin: 0 auto;
+  }
+}
+
+    
+  
 
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
-  <HeaderComp />
-  <MainComp :filmlist="movieLists"/>
+  <HeaderComp @provideText='doSearch'/>
+  <MainComp :filmlist="filteredList"/>
   </div>
 </template>
 
@@ -24,9 +24,11 @@ export default {
        apiParametres:{
          api_key: 'db434741c3c9df5b6b054b9b08d39df2',
          language: 'it_IT',
-         query: 'matrix'
+         query: 'star wars'
        },
        movieLists: [],
+       filteredList: []
+      
      }
    },
   mounted(){
@@ -38,13 +40,27 @@ export default {
       .then(res =>{
         console.log(res.data.results, '------------')
         this.movieLists = res.data.results;
-        
+        this.filteredList = this.movieLists;
+            
       })
-    }
-  }
+    },   
+    doSearch(inputText){
+      if(inputText == ''){
+        this.filteredList = this.movieLists
+      } else{
+        this.filteredList = this.movieLists.filter((movie) => movie.title.toLowerCase().includes(inputText.toLowerCase()))
+      }
+    }  
+  }, 
 }
 </script>
 
 <style lang="scss">
+@import './assets/style/general';
+
+.div{
+  min-height: 100vh;
+  background-color: #242832;
+}
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>TVSSss</div>
+  <div></div>
 </template>
 
 <script>
