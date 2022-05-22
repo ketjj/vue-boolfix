@@ -2,7 +2,11 @@
   <div class="my-main">
     <div class="k_container">
 
-      <ShowMovieComp :onlyFilmList="filmlist"
+      <ShowMovieComp 
+      :onlyFilmList="filmlist"
+      />
+      <ShowTvComp 
+      :seriesList="tvseriesList"
       />
 
     </div>
@@ -15,15 +19,18 @@
 
 <script>
 import ShowMovieComp from '@/components/ShowMovieComp'
+import ShowTvComp from '@/components/ShowTvComp'
 
 export default {
   name: 'MainComp',
   components:{
-    ShowMovieComp
+    ShowMovieComp,
+    ShowTvComp
   },
 
   props:{
-    filmlist:Array
+    filmlist:Array,
+    tvseriesList:Array
   }
 }
 </script>

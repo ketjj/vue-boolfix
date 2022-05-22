@@ -1,6 +1,6 @@
 <template>
   <div>
-     <h5>Movies</h5>
+     <h4 class="my-4">Movies</h4>
     <div class="card-wrapper">
       <MovieCard
       v-for="(singleFilm,index) in onlyFilmList" :key="`film${index}`"
@@ -23,12 +23,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h4{
+  text-transform: uppercase;
+}
 .card-wrapper{
   display: flex;
   flex-wrap: wrap;
 }
-
-
-
-
 </style>
