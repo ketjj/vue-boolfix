@@ -1,11 +1,16 @@
 <template>
     <div class="k_card">
-      <img :src="`https://image.tmdb.org/t/p/w200${film.poster_path}`" alt="film.title">
+      <div class="mb-4">
+        <img :src="`https://image.tmdb.org/t/p/w200${film.poster_path}`" alt="film.title">
+      </div>
 
-      <div>{{film.title}}</div>
-      <div>{{film.original_title}}</div>
-      <div>{{film.original_language}}</div>
-      <div>{{film.vote_average}}</div>
+      <div class="info">
+        <div class="title">{{film.title}}</div>
+        <div class="original">Original Name:</div>
+        <div class="name">"{{film.original_title}}"</div>
+        <div>Language:{{film.original_language}}</div>
+        <div>Rating: {{film.vote_average}}</div>
+      </div>
 
     </div>
 
@@ -24,26 +29,36 @@ export default {
 .k_card{
   flex-basis: 20%;
   padding-right: 15px;
-  text-align: center;
+  text-align: left;
+  margin-bottom: 30px;
+  &:hover{
+    cursor: pointer; 
+    display: block;   
+  }
   img{
     width:100%;
+    object-fit: contain;
+  }
+  .info{
+
+    width: 200px;
+    padding-left: 15px;
+    color: rgb(183, 180, 180);    
+    //display: none;
+    .overlay{
+      background-color: black;
+    }
+
+    .title{
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
+      color:white;
+    }
+    .original{
+      font-size: 14px; 
+    }
+   
   }
 }
-// .card-container{
-//     width: 100%;
-//     height: 100%;
-//     display: flex;
-//     flex-basis: 25%;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     .image-wrap{
-//       width: 20%;
-//     }
-//     img{
-//       width: 100px;
-//     }
-    
-//     }
-
 </style>

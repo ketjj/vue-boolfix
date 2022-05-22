@@ -29,5 +29,6 @@ h4{
 .card-wrapper{
   display: flex;
   flex-wrap: wrap;
+  
 }
 </style>

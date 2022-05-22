@@ -39,6 +39,7 @@ export default {
    },
 
   methods: {
+
     getApiFilm(){
       const apiParametres = {
          api_key: this.api_key,
@@ -50,8 +51,9 @@ export default {
         console.log(res.data.results, '------------')
         this.movieLists = res.data.results;            
       })
-      this.getApiTv()
+      //this.getApiTv()
     },
+
     getApiTv(){
        const apiParametres2 = {
           api_key: this.api_key,
@@ -68,8 +70,10 @@ export default {
     getInsertedText(inputText){
       this.insertedText = inputText;
       this.getApiFilm();
+       this.getApiTv();
     }  
   },
+
   computed:{
     filteredFilmData: function() {
       console.log("chiamata");
@@ -81,11 +85,9 @@ export default {
     }
   },
   mounted(){
-      this.getApiFilm();
-      
-  }
-
-  
+    this.getApiFilm(); 
+    this.getApiTv();
+  }  
 }
 </script>
 

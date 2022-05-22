@@ -26,6 +26,7 @@ export default {
 h4{
   text-transform: uppercase;
 }
+
 .card-wrapper{
   display: flex;
   flex-wrap: wrap;
