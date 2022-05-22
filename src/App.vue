@@ -1,7 +1,7 @@
 <template>
   <div>
-  <HeaderComp @provideText='doSearch'/>
-  <MainComp :filmlist="filteredList"/>
+  <HeaderComp @provideText='getInsertedText'/>
+  <MainComp :filmlist="filteredFilmData"/>
   </div>
 </template>
 
@@ -20,38 +20,58 @@ export default {
   },
    data(){
      return{
-       apiUrl: 'https://api.themoviedb.org/3/search/movie',
-       apiParametres:{
-         api_key: 'db434741c3c9df5b6b054b9b08d39df2',
-         language: 'it_IT',
-         query: 'star wars'
-       },
-       movieLists: [],
-       filteredList: []
-      
+
+       insertedText: 'star wars',
+
+       apiUrlFilm: 'https://api.themoviedb.org/3/search/movie',
+       api_key: 'db434741c3c9df5b6b054b9b08d39df2',
+       language: 'it_IT',
+
+       movieLists: [],      
      }
    },
-  mounted(){
-    this.getApi()
-  },
+
   methods: {
-    getApi(){
-      axios.get(this.apiUrl, {params: this.apiParametres})
+    getApiFilm(){
+      const apiParametres = {
+         api_key: this.api_key,
+         language: this.language,
+         query: this.insertedText
+       };
+      axios.get(this.apiUrlFilm, {params: apiParametres})
       .then(res =>{
         console.log(res.data.results, '------------')
-        this.movieLists = res.data.results;
-        this.filteredList = this.movieLists;
-            
+        this.movieLists = res.data.results;            
       })
-    },   
-    doSearch(inputText){
-      if(inputText == ''){
-        this.filteredList = this.movieLists
-      } else{
-        this.filteredList = this.movieLists.filter((movie) => movie.title.toLowerCase().includes(inputText.toLowerCase()))
-      }
+    },
+
+    getInsertedText(inputText){
+      this.insertedText = inputText;
     }  
-  }, 
+  },
+  computed:{
+    filteredFilmData: function() {
+       if(this.insertedText == ''){
+         return  this.movieLists;
+       } else{
+         this.getApiFilm();
+         //return this.movieLists.filter((movie) => movie.title.toLowerCase().includes(this.insertedText.toLowerCase()));
+         return this.movieLists;
+
+       }
+    },
+    // filteredTvData: function() {
+    //    if(this.insertedText == ''){
+    //      return  this.movieLists;
+    //    } else{
+    //      this.getApi();
+    //      return this.movieLists.filter((movie) => movie.title.toLowerCase().includes(this.insertedText.toLowerCase()));
+    //    }
+    // }
+  
+  } 
+
+  
 }
 </script>
 
