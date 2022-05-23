@@ -7,7 +7,8 @@
     <div class="seacrh d-flex align-items-center">
     <div>
       <input 
-      v-model.trim="insertTxt"    
+      v-model.trim="insertTxt" 
+      @keyup.enter="$emit('provideText', insertTxt)"   
       type="text" placeholder="Cerca">
     </div>
     <div>

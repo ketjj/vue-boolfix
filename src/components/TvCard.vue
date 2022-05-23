@@ -1,66 +1,85 @@
 <template>
     <div class="k_card">
-      <div class="mb-4">
         <img :src="`https://image.tmdb.org/t/p/w200${serie.poster_path}`" alt="serie.name">
-      </div>
+
 
        <div class="info">
         <div class="title">{{serie.name}}</div>
+        <div class="or-line"></div>
         <div class="original">Original Name:</div>
         <div class="name">"{{serie.original_name}}"</div>
         <div>Language: {{serie.original_language}}</div>
-        <div>Rating: {{serie.vote_average}}</div>
+        <div>Rating: {{serie.vote_average}} <i class="fa-solid fa-star"></i></div>
       </div>
 
     </div>
 
 </template>
 
-
-
 <script>
 export default {
- name: 'TvCard',
+  name: 'TvCard',
+  data(){
+   return{
+     totalStars: 10,
+   }
+  },
   props:{
     serie:Object
-  }
+  },
+
 }
 </script>
 
 <style lang="scss" scoped>
 .k_card{
-  flex-basis: 20%;
-  padding-right: 15px;
-  text-align: left;
-  margin-bottom: 30px;
-  &:hover{
-    cursor: pointer; 
-    display: block;   
+  position: relative;
+  flex-basis: 200px;
+  box-shadow: 0px 0px 10px black;
+  margin:0 26px 50px 0;  
+    &:hover{
+      transform: scale(1.1);
+      box-shadow: 0px 0px 20px rgb(0, 0, 0);
+      cursor: pointer;
+      transition: all .7s;      
+    }
+    &:Hover .info{
+      display: block;
+    }
   }
   img{
     width:100%;
     object-fit: contain;
   }
   .info{
-
-    width: 200px;
-    padding-left: 15px;
-    color: rgb(183, 180, 180);    
-    //display: none;
-    .overlay{
-      background-color: black;
-    }
-
+    position: absolute;
+    z-index: 999;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    font-size: 0.9rem;
+    color: rgb(238, 226, 226);
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
     .title{
       font-size: 16px;
       text-transform: uppercase;
       font-weight: bold;
       color:white;
+      //border-bottom: 1px solid white;
+    }
+    .or-line{
+      width: 30px;
+      height:1px;
+      background-color:rgb(242, 134, 134);
+      margin: 10px 0;
+      border-radius: 10px;
     }
     .original{
       font-size: 14px; 
-    }
-   
+    }   
   }
-}
+
 </style>
