@@ -8,8 +8,16 @@
         <div class="or-line"></div>
         <div class="original">Original Name:</div>
         <div class="name">"{{serie.original_name}}"</div>
-        <div>Language: {{serie.original_language}}</div>
-        <div>Rating: {{serie.vote_average}} <i class="fa-solid fa-star"></i></div>
+        <div>Language:
+           <span><lang-flag :iso="serie.original_language"/></span>
+        </div>
+        
+        <div>Rating: 
+          <i v-for="index in  Math.ceil(parseFloat(serie.vote_average) / 2)" :key="index" class="fa-solid fa-star full-star"></i>
+
+          <i v-for="index in (5 -  Math.ceil(parseFloat(serie.vote_average) /2))" :key="index" class="fa-regular fa-star"></i>
+
+        </div>
       </div>
 
     </div>
@@ -17,16 +25,22 @@
 </template>
 
 <script>
+import LangFlag from 'vue-lang-code-flags';
+
 export default {
+
   name: 'TvCard',
-  data(){
-   return{
-     totalStars: 10,
-   }
-  },
+  // data(){
+  //  return{
+  //    totalStars: 10,
+  //  }
+  // },
   props:{
     serie:Object
   },
+  components:{
+    LangFlag
+  }
 
 }
 </script>
@@ -80,6 +94,9 @@ export default {
     .original{
       font-size: 14px; 
     }   
+    .full-star{
+      color: yellow;
+    }
   }
 
 </style>
