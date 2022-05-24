@@ -1,9 +1,15 @@
 <template>
   <div>
   <HeaderComp @provideText='getInsertedText'/>
-  <MainComp :filmlist="filteredFilmData" 
-  :tvseriesList="filteredTvData" 
+
+  <MainComp titleCard="movie"
+  :itemList="filteredFilmData" 
   />
+
+   <MainComp titleCard="tv-series"
+  :itemList="filteredTvData"
+  />
+  
 
   </div>
 </template>
@@ -35,7 +41,9 @@ export default {
        language: 'it_IT',
 
        movieLists: [],  
-       tvLists: []    
+       tvLists: [], 
+       cardTitle: ['movie', 'tv-Series']  
+       
      }
    },
 
@@ -52,6 +60,9 @@ export default {
         console.log(res.data.results, '------------')
         this.movieLists = res.data.results;            
       })
+      .catch(err =>{
+        console.log(err)
+      })
       //this.getApiTv()
     },
 
@@ -66,12 +77,15 @@ export default {
          console.log(res.data.results, '=======')
          this.tvLists = res.data.results;            
       })
+      .catch(err =>{
+        console.log(err)
+      })
     },
 
     getInsertedText(inputText){
       this.insertedText = inputText;
       this.getApiFilm();
-       this.getApiTv();
+      this.getApiTv();    
     }  
   },
 

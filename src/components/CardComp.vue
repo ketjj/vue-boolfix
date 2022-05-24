@@ -1,23 +1,24 @@
 <template>
     <div class="k_card">
+           
+      <img :src="`https://image.tmdb.org/t/p/w200${cardData.poster_path}`" alt="">
+      <img v-if="cardData.poster_path == undefined" src="../assets/img/default.jpg" alt="cardData.title">
       
-      <img :src="`https://image.tmdb.org/t/p/w200${film.poster_path}`" alt="film.title">
      
-
       <div class="info">
-        <div class="title">{{film.title}}</div>
+        <div class="title">{{cardData.title || cardData.name}}</div>
         <div class="or-line"></div>
         <div class="original">Original Name:</div>
-        <div class="name">"{{film.original_title}}"</div>
+        <div class="name">"{{cardData.original_title || cardData.original_name}}"</div>
         <div>Original Language: 
           <!-- <lang-flag iso="en" /> -->
-          <span><lang-flag :iso="film.original_language" :title="film.original_language"/></span>
+          <span><lang-flag :iso="cardData.original_language" :title="cardData.original_language"/></span>
         </div>
 
 
         <div>Rating: 
-          <i v-for="index in  Math.ceil(parseFloat(film.vote_average) / 2)" :key="index" class="fa-solid fa-star full-star"></i>
-          <i v-for="index in (5 -  Math.ceil(parseFloat(film.vote_average) /2))" :key="index" class="fa-regular fa-star"></i>
+          <i v-for="index in  Math.ceil(parseFloat(cardData.vote_average) / 2)" :key="index" class="fa-solid fa-star full-star"></i>
+          <i v-for="index in (5 -  Math.ceil(parseFloat(cardData.vote_average) /2))" :key="index" class="fa-regular fa-star"></i>
 
         </div>
       </div>
@@ -30,9 +31,9 @@
 import LangFlag from 'vue-lang-code-flags';
 
 export default {
- name: 'MovieCard',
+ name: 'CardComp',
   props:{
-    film:Object
+    cardData:Object
   },
   components:{
     LangFlag

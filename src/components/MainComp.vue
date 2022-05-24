@@ -2,35 +2,38 @@
   <div class="my-main">
     <div class="k_container">
 
-      <ShowMovieComp 
-      :onlyFilmList="filmlist"
-      />
-      <ShowTvComp 
-      :seriesList="tvseriesList"
-      />
+      <div>
+        <h4 v-if="titleCard == 'movie'">Movie</h4>
+        <h4 v-else>Tv Series</h4>
+
+        <div class="card-wrapper">
+          <CardComp
+          v-for="(singleFilm,index) in itemList" :key="`film${index}`"
+          :cardData="singleFilm"
+          />
+        </div>
+      </div>
 
     </div>
-
-    </div>
+  </div>
 
 
     
 </template>
 
 <script>
-import ShowMovieComp from '@/components/ShowMovieComp'
-import ShowTvComp from '@/components/ShowTvComp'
+import CardComp from '@/components/CardComp'
 
 export default {
   name: 'MainComp',
   components:{
-    ShowMovieComp,
-    ShowTvComp
+    CardComp
   },
 
   props:{
-    filmlist:Array,
-    tvseriesList:Array
+    itemList:Array,
+    titleCard: String
+
   }
 }
 </script>
@@ -45,6 +48,15 @@ export default {
     width: 75%;
     margin: 0 auto;
   }
+  h4{
+  text-transform: uppercase;
+  margin: 30px 0;
+}
+.card-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  
+}
 }
 
     

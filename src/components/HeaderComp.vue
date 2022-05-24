@@ -28,7 +28,7 @@ export default {
     return{
       insertTxt:''
     }
-  }
+  },
 }
 </script>
 
