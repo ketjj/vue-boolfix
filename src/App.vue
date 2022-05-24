@@ -1,14 +1,18 @@
 <template>
-  <div>
+  <div class="my-app">
   <HeaderComp @provideText='getInsertedText'/>
 
-  <MainComp titleCard="movie"
+  <MainComp v-if=" movieLists.length > 0" titleCard="movie"
   :itemList="filteredFilmData" 
   />
 
-   <MainComp titleCard="tv-series"
+   <MainComp v-if=" tvLists.length > 0" titleCard="tv-series"
   :itemList="filteredTvData"
   />
+
+  <h3 v-if="(movieLists.length === 0) && (tvLists.length === 0)">
+    Nessuna informazione è stata trovata 
+  </h3>
   
 
   </div>
@@ -42,7 +46,6 @@ export default {
 
        movieLists: [],  
        tvLists: [], 
-       cardTitle: ['movie', 'tv-Series']  
        
      }
    },
@@ -75,7 +78,8 @@ export default {
        axios.get(this.apiUrlTv, {params: apiParametres2})
        .then(res =>{
          console.log(res.data.results, '=======')
-         this.tvLists = res.data.results;            
+         this.tvLists = res.data.results; 
+         this.insertedText = ''           
       })
       .catch(err =>{
         console.log(err)
@@ -108,10 +112,15 @@ export default {
 
 <style lang="scss">
 @import './assets/style/general';
-
-.div{
-  min-height: 100vh;
+.my-app{
   background-color: #242832;
+  min-height: 100vh;
+  color: white;
+  h3{
+    padding-top: 100px;
+    width: 75%;
+    margin: 0 auto;
+  }
 }
 
 </style>

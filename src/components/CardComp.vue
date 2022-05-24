@@ -11,7 +11,8 @@
         <div class="original">Original Name:</div>
         <div class="name">"{{cardData.original_title || cardData.original_name}}"</div>
         <div>Original Language: 
-          <!-- <lang-flag iso="en" /> -->
+    
+        
           <span><lang-flag :iso="cardData.original_language" :title="cardData.original_language"/></span>
         </div>
 

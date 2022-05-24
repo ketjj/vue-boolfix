@@ -41,7 +41,7 @@ export default {
 <style lang="scss" scoped>
 .my-main{
   min-height: 100vh;
-  background-color: #242832;
+
   padding-top: 100px;
   color:white; 
   .k_container{
