@@ -13,6 +13,7 @@
     </div>
     <div>
       <button @click="$emit('provideText', insertTxt)" class="btn btn-danger k_button">Cerca</button>
+      <button @click="reloadPage" class="btn btn-warning k_button" >Reload</button> 
     </div>
 
     </div>
@@ -29,6 +30,11 @@ export default {
       insertTxt:''
     }
   },
+  methods:{
+    reloadPage() {
+      window.location.reload();
+    }
+  }
 }
 </script>
 
@@ -49,7 +55,7 @@ export default {
   }
   .k_button{
     width: 80px;
-    margin: 10px;
+    margin-left: 10px;
     padding: 3px;
   }
 }

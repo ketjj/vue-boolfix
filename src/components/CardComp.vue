@@ -2,7 +2,7 @@
     <div class="k_card">
            
       <img :src="`https://image.tmdb.org/t/p/w200${cardData.poster_path}`" alt="">
-      <img v-if="cardData.poster_path == undefined" src="../assets/img/default.jpg" alt="cardData.title">
+      <img v-if="cardData.poster_path == undefined" src="../assets/img/default.jpg" alt="">
       
      
       <div class="info">
@@ -10,16 +10,16 @@
         <div class="or-line"></div>
         <div class="original">Original Name:</div>
         <div class="name">"{{cardData.original_title || cardData.original_name}}"</div>
-        <div>Original Language: 
-    
-        
-          <span><lang-flag :iso="cardData.original_language" :title="cardData.original_language"/></span>
-        </div>
+        <span>Original Language: 
+          <!-- <img :src="(`..assets/img/flags/en.png`)" alt=""> -->
+          <img :src="require(`../assets/img/flags/${cardData.original_language}.png`)" :alt="cardData.original_language">
+
+        </span>
 
 
         <div>Rating: 
-          <i v-for="index in  Math.ceil(parseFloat(cardData.vote_average) / 2)" :key="index" class="fa-solid fa-star full-star"></i>
-          <i v-for="index in (5 -  Math.ceil(parseFloat(cardData.vote_average) /2))" :key="index" class="fa-regular fa-star"></i>
+          <i v-for="index in  Math.ceil(parseFloat(cardData.vote_average) / 2)" :key="`k-${index}`" class="fa-solid fa-star full-star"></i>
+          <i v-for="index in (5 -  Math.ceil(parseFloat(cardData.vote_average) /2))" :key="`key-${index}`" class="fa-regular fa-star"></i>
 
         </div>
       </div>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import LangFlag from 'vue-lang-code-flags';
+
 
 export default {
  name: 'CardComp',
@@ -37,7 +37,7 @@ export default {
     cardData:Object
   },
   components:{
-    LangFlag
+
   }
 }
 </script>
@@ -51,7 +51,7 @@ export default {
   box-shadow: 0px 0px 10px black;
   margin:0 26px 50px 0;  
     &:hover{
-      transform: scale(1.1);
+      //transform: scale(1.1);
       box-shadow: 0px 0px 20px rgb(0, 0, 0);
       cursor: pointer;
       transition: all .7s;      
@@ -95,6 +95,9 @@ export default {
     }
     .full-star{
       color: yellow;
+    }
+    img{
+      width:20px;
     }   
   }
 
