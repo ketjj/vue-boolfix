@@ -4,3 +4,15 @@
   width: 70%;
   margin: 0 auto;
 }
+
+::-webkit-scrollbar {
+  width: .7em;
+  height: .7em;
+  margin-right: 10px;
+}
+::-webkit-scrollbar-thumb {
+  min-height: 20px;
+  min-width: 20px;
+  border: none;
+  background-color: rgb(71, 68, 68);
+}

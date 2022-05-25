@@ -60,7 +60,7 @@ export default {
        };
       axios.get(this.apiUrlFilm, {params: apiParametres})
       .then(res =>{
-        console.log(res.data.results, '------------')
+        //console.log(res.data.results, '------------')
         this.movieLists = res.data.results;            
       })
       .catch(err =>{
@@ -77,13 +77,34 @@ export default {
         };
        axios.get(this.apiUrlTv, {params: apiParametres2})
        .then(res =>{
-         console.log(res.data.results, '=======')
+         //console.log(res.data.results, '=======')
          this.tvLists = res.data.results; 
          this.insertedText = ''           
       })
       .catch(err =>{
         console.log(err)
       })
+    },
+
+    getPopularNow(){
+      const params = {
+        api_key: this.api_key
+      }
+
+      axios.get(`https://api.themoviedb.org/3/movie/popular`,{ params })
+        .then((response) => {
+          for(let i = 0; i < 10; i++) {
+        this.movieLists.push(response.data.results[i])
+      }
+        });
+      axios
+        .get(`https://api.themoviedb.org/3/tv/popular`, { params })
+        .then((response) => {
+          for(let i = 0; i < 10; i++) {
+        this. tvLists.push(response.data.results[i])
+      }
+        });
+
     },
 
     getInsertedText(inputText){
@@ -95,17 +116,16 @@ export default {
 
   computed:{
     filteredFilmData: function() {
-      console.log("chiamata");
+      //console.log("chiamata");
       return this.movieLists;         
     },
     filteredTvData: function() {
-      console.log("chiamata");
+      //console.log("chiamata");
       return this.tvLists;         
     }
   },
   mounted(){
-    this.getApiFilm(); 
-    this.getApiTv();
+    this.getPopularNow()
   }  
 }
 </script>

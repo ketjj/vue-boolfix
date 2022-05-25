@@ -1,15 +1,20 @@
 <template>
     <div class="k_card">
-           
+     
+
       <img :src="`https://image.tmdb.org/t/p/w200${cardData.poster_path}`" alt="">
       <img v-if="cardData.poster_path == undefined" src="../assets/img/default.jpg" alt="">
       
-     
+    
       <div class="info">
-        <div class="title">{{cardData.title || cardData.name}}</div>
-        <div class="or-line"></div>
-        <div class="original">Original Name:</div>
-        <div class="name">"{{cardData.original_title || cardData.original_name}}"</div>
+        <div class="more-info">
+          
+        <div v-if="(cardData.title || cardData.name) === (cardData.original_title || cardData.original_name)" class="title">{{cardData.title || cardData.name}}</div>
+
+        <div v-else class="original">
+          <div class="title">{{cardData.title || cardData.name}}</div>
+          <div>Original Name:  {{cardData.original_title || cardData.original_name}}</div>
+        </div>
         <span>Original Language: 
           <!-- <img :src="(`..assets/img/flags/en.png`)" alt=""> -->
           <img :src="require(`../assets/img/flags/${cardData.original_language}.png`)" :alt="cardData.original_language">
@@ -22,7 +27,13 @@
           <i v-for="index in (5 -  Math.ceil(parseFloat(cardData.vote_average) /2))" :key="`key-${index}`" class="fa-regular fa-star"></i>
 
         </div>
+        <div class="my-2">Overview:</div>
+        <div v-if="cardData.overview === ''"> Non presente</div>
+        <div v-else class="overview">{{cardData.overview}} </div>
+        </div>
       </div>
+
+           
 
     </div>
 
@@ -46,8 +57,7 @@ export default {
 .k_card{
   position: relative;
   flex-basis: 200px;
-  //height: 300px;
-  //overflow: hidden;
+  height: 300px;
   box-shadow: 0px 0px 10px black;
   margin:0 26px 50px 0;  
     &:hover{
@@ -76,29 +86,35 @@ export default {
     color: rgb(238, 226, 226);
     background-color: rgba(0, 0, 0, 0.7);
     display: none;
-    .title{
-      font-size: 16px;
-      text-transform: uppercase;
-      font-weight: bold;
-      color:white;
-      //border-bottom: 1px solid white;
+    overflow: auto;
+    .more-info{
+    height:265px;
+      .title{
+        font-size: 14px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color:white;
+        //border-bottom: 1px solid white;
+      }
+      .or-line{
+        width: 30px;
+        height:1px;
+        background-color:rgb(242, 134, 134);
+        margin: 10px 0;
+        border-radius: 10px;
+      }
+      .original{
+        font-size: 14px; 
+      }
+      .full-star{
+        color: yellow;
+      }
+      img{
+        width:20px;
+      } 
+
     }
-    .or-line{
-      width: 30px;
-      height:1px;
-      background-color:rgb(242, 134, 134);
-      margin: 10px 0;
-      border-radius: 10px;
-    }
-    .original{
-      font-size: 14px; 
-    }
-    .full-star{
-      color: yellow;
-    }
-    img{
-      width:20px;
-    }   
   }
 
 </style>

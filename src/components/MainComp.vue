@@ -24,6 +24,7 @@
 <script>
 import CardComp from '@/components/CardComp'
 
+
 export default {
   name: 'MainComp',
   components:{
@@ -33,7 +34,6 @@ export default {
   props:{
     itemList:Array,
     titleCard: String
-
   }
 }
 </script>
