@@ -1,6 +1,9 @@
 <template>
   <div class="my-app">
-  <HeaderComp @provideText='getInsertedText'/>
+  <HeaderComp 
+  @provideText='getInsertedText'
+  @goBackToHomePage="getPopularNow"
+  />
 
   <MainComp v-if=" movieLists.length > 0" titleCard="movie"
   :itemList="filteredFilmData" 
@@ -86,6 +89,7 @@ export default {
     },
 
     getPopularNow(){
+      
       const params = {
         api_key: this.api_key
       }
@@ -94,15 +98,25 @@ export default {
         .then((response) => {
           for(let i = 0; i < 10; i++) {
         this.movieLists.push(response.data.results[i])
-      }
-        });
+        }
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+
       axios
         .get(`https://api.themoviedb.org/3/tv/popular`, { params })
         .then((response) => {
           for(let i = 0; i < 10; i++) {
         this. tvLists.push(response.data.results[i])
-      }
-        });
+        }
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+      //ho dovuto svuotare, perchè getPopular + MovieList + TvList; Voglio ricevevi solo GetPopular
+      this.movieLists = [] 
+      this.tvLists= []
 
     },
 

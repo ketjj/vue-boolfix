@@ -1,19 +1,25 @@
 <template>
   <div class="my-header">
-    <div>
+    <div class="nav-section">
       <img src="../assets/img/ketflix.png" alt="">
+
+      <ul class="d-flex">
+        <li @click="returnPopular(page)">Home</li>
+        <li>Movies</li>
+        <li>TV series</li>
+      </ul>
     </div>
 
     <div class="seacrh d-flex align-items-center">
     <div>
       <input 
       v-model.trim="insertTxt" 
-      @keyup.enter="$emit('provideText', insertTxt)"   
+      @keyup.enter="select(insertTxt)"   
       type="text" placeholder="Cerca">
     </div>
     <div>
-      <button @click="$emit('provideText', insertTxt)" class="btn btn-danger k_button">Cerca</button>
-      <button @click="reloadPage" class="btn btn-warning k_button" >Reload</button> 
+      <button @click="select(insertTxt)" class="btn btn-danger k_button">Cerca</button>
+      <!-- <button @click="reloadPage" class="btn btn-warning k_button" >Reload</button>  -->
     </div>
 
     </div>
@@ -31,8 +37,15 @@ export default {
     }
   },
   methods:{
-    reloadPage() {
-      window.location.reload();
+    // reloadPage() {
+    //   window.location.reload();
+    // },
+    select(insertTxt){
+      this.$emit('provideText', insertTxt);
+      this.insertTxt = ''
+    },
+    returnPopular(page){
+      this.$emit('goBackToHomePage', page);
     }
   }
 }
@@ -57,6 +70,26 @@ export default {
     width: 80px;
     margin-left: 10px;
     padding: 3px;
+  }
+  .nav-section{
+    width: 500px;
+    display:flex;
+    align-items: center;
+    ul{
+      margin: 0;
+    li{
+      list-style: none;
+      margin-right: 20px;
+      font-size: 17px;
+      &:hover{
+        cursor: pointer;
+        color: rgb(183, 183, 183)
+      }
+      &:active{
+        color:rgb(255, 77, 77);
+      }
+    }
+    }
   }
 }
 
