@@ -22,7 +22,6 @@
 import MainComp from './components/MainComp'
 import HeaderComp from './components/HeaderComp'
 
-
 import axios from 'axios'
 
 

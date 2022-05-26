@@ -1,9 +1,9 @@
 <template>
     <div class="k_card">
      
-
       <img :src="`https://image.tmdb.org/t/p/w200${cardData.poster_path}`" alt="">
-      <img v-if="cardData.poster_path == undefined" src="../assets/img/default.jpg" alt="">
+
+      <img v-if="cardData.poster_path === undefined || cardData.poster_path === null" src="../assets/img/default.jpg" alt="">
       
     
       <div class="info">
@@ -15,10 +15,12 @@
           <div class="title">{{cardData.title || cardData.name}}</div>
           <div>Original Name:  {{cardData.original_title || cardData.original_name}}</div>
         </div>
+        
         <span>Original Language: 
           <!-- <img :src="(`..assets/img/flags/en.png`)" alt=""> -->
-          <img :src="require(`../assets/img/flags/${cardData.original_language}.png`)" :alt="cardData.original_language">
 
+          <!-- <lang-flag iso="en" /> -->
+            <span><lang-flag :iso="cardData.original_language" :title="cardData.original_language"/></span>
         </span>
 
 
@@ -41,6 +43,8 @@
 
 <script>
 
+import LangFlag from 'vue-lang-code-flags';
+
 
 export default {
  name: 'CardComp',
@@ -48,12 +52,13 @@ export default {
     cardData:Object
   },
   components:{
-
+    LangFlag,
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
 .k_card{
   position: relative;
   flex-basis: 200px;
@@ -66,9 +71,9 @@ export default {
       cursor: pointer;
       transition: all .7s;      
     }
-    &:Hover .info{
-      display: block;
-    }
+     &:Hover .info{
+       display: block;
+     }
   }
   img{
     width:100%;
